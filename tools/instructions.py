@@ -66,7 +66,7 @@ def div(value, acc):
 
 def hlt(address, ic):
     """
-    sets ic value to address
+    sets ic value to address. end of program.
     :param address:
     :param ic:
     :return: None
@@ -97,14 +97,20 @@ def rwd(address, memory, line_number):
     :return: None
     """
     while 1:
-        user_input = input(f"Enter the instruction (called from line {line_number}):\n")
+        user_input = input(f"Enter the instruction (called from line {line_number}, saves at {address}):\n")
         pattern = re.compile("^[+][A-Z0]{3}0{3}[0-9]{4}$")
         if not pattern.match(user_input):
             print("Invalid instruction! Try again")
-            user_input = input(f"Enter the instruction (called from line {line_number}):\n")
+            user_input = input(f"Enter the instruction (called from line {line_number}, saves at {address}):\n")
         else:
             break
-    memory.store(address, user_input)
+    if memory.memory[address] != 11*'0':
+        print("Warning :: destination address is not free. Are you sure (y/n)?")
+        user_answer = input()
+        while user_answer not in ('y', 'n'):
+            user_answer = input('Invalid input! Try again.\n')
+        if user_answer == 'y':
+            memory.store(address, user_input)
 
 
 def wwd(address, memory, output):
