@@ -2,3 +2,5 @@
 .idea
 __pycache__
 ./doc/
+./testcase/
+./tools/test.py
