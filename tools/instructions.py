@@ -31,7 +31,7 @@ def add(value, acc):
     :param acc:
     :return: None
     """
-    acc.value += value
+    acc.value += int(value)
 
 
 def sub(value, acc):
@@ -41,7 +41,7 @@ def sub(value, acc):
     :param acc:
     :return: None
     """
-    acc.value -= value
+    acc.value -= int(value)
 
 
 def mpy(value, acc):
@@ -51,7 +51,7 @@ def mpy(value, acc):
     :param acc:
     :return: None
     """
-    acc.value *= value
+    acc.value *= int(value)
 
 
 def div(value, acc):
@@ -61,7 +61,7 @@ def div(value, acc):
     :param acc:
     :return: None
     """
-    acc.value //= value
+    acc.value //= int(value)
 
 
 def hlt(address, ic):
@@ -97,11 +97,11 @@ def rwd(address, memory, line_number):
     :return: None
     """
     while 1:
-        user_input = input(f"Enter the instruction (called from line {line_number}):")
+        user_input = input(f"Enter the instruction (called from line {line_number}):\n")
         pattern = re.compile("^[+][A-Z0]{3}0{3}[0-9]{4}$")
         if not pattern.match(user_input):
             print("Invalid instruction! Try again")
-            user_input = input(f"Enter the instruction (called from line {line_number}):")
+            user_input = input(f"Enter the instruction (called from line {line_number}):\n")
         else:
             break
     memory.store(address, user_input)
