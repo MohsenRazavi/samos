@@ -1,3 +1,6 @@
+import re
+
+
 def lda(address, memory, acc):
     """
     loads value from memory to acc
@@ -7,7 +10,7 @@ def lda(address, memory, acc):
     :param acc:
     :return: None
     """
-    acc.value = memory.load(address)
+    acc.value += memory.load(address)
 
 
 def sto(address, memory, acc):
@@ -86,15 +89,22 @@ def bmi(address, ic, acc):
         ic.value = address
 
 
-def rwd(address, memory):
+def rwd(address, memory, line_number):
     """
     reads 11 chars and saves to the given address of memory
     :param address:
     :param memory:
     :return: None
     """
-    pass
-    memory.store(address)
+    while 1:
+        user_input = input(f"Enter the instruction (called from line {line_number}):")
+        pattern = re.compile("^[+][A-Z0]{3}0{3}[0-9]{4}$")
+        if not pattern.match(user_input):
+            print("Invalid instruction! Try again")
+            user_input = input(f"Enter the instruction (called from line {line_number}):")
+        else:
+            break
+    memory.store(address, user_input)
 
 
 def wwd(address, memory, output):
