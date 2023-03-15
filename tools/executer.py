@@ -1,4 +1,4 @@
-from instructions import *
+from tools.instructions import *
 
 
 def execute(memory, ic, acc, output):
@@ -48,9 +48,14 @@ def execute(memory, ic, acc, output):
             elif command == 'WWD':
                 wwd(param, memory, output)
             elif command == 'HLT':
-                break
                 hlt(param, ic)
                 ic_in_instruction_range = False
+                break
+
+            else:
+                error_index = str(ic.value).zfill(4)
+                print(f"Invalid instruction in line {error_index}! :: {memory.memory[error_index]}")
+                break
 
             ic_val = int(ic.value) + 1
             ic.value = str(ic_val).zfill(4)
@@ -58,3 +63,4 @@ def execute(memory, ic, acc, output):
         else:
             error_index = str(ic.value).zfill(4)
             print(f"Invalid instruction in line {error_index}! :: {memory.memory[error_index]}")
+            break

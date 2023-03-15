@@ -1,10 +1,18 @@
 class Memory:
-    memory = {str(i).zfill(4): 11 * '0' for i in range(0, 10000)}
+    memory = {}
+
+    def __init__(self, length):
+        self.memory = {str(i).zfill(4): 11 * '0' for i in range(0, length)}
 
     def __str__(self):
         res = ''
-        for k, v in self.memory.items():
-            res += f'<< {k} :: {v} >>\t'
+        for k in range(0, len(self.memory), 4):
+            for j in range(4):
+                try:
+                    res += f"<< {str(k + j).zfill(4)} :: {self.memory[str(k + j).zfill(4)]}>>\t"
+                except:
+                    pass
+            res += '\n'
         return res
 
     def load(self, address):
