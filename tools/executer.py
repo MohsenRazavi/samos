@@ -61,6 +61,10 @@ def execute(memory, ic, acc, output):
             ic_val = int(ic.value) + 1
             ic.value = str(ic_val).zfill(4)
 
+        elif ic_in_instruction_range:
+            error_index = str(ic.value).zfill(4)
+            errors.append(f"Define data between instructions {error_index} ! :: {memory.memory[error_index]}")
+            break
         else:
             error_index = str(ic.value).zfill(4)
             errors.append(f"Instruction doesn't match with pattern +XXX0009999 {error_index} ! :: {memory.memory[error_index]}")

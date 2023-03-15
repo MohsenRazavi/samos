@@ -44,3 +44,7 @@ else:
     print(f'The program run successfully in {run_time} seconds !')
 
 
+"""
+// Seyed Mohsen Razavi Zadegan 40030489
+// github link : https://github.com/MohsenRazavi/samos ( private while upload time :) )
+"""
