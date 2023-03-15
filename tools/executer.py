@@ -2,6 +2,7 @@ from tools.instructions import *
 
 
 def execute(memory, ic, acc, output):
+    errors = []
     ic_in_instruction_range = False
     while 1:
         code = memory.memory[str(ic.value).zfill(4)]
@@ -54,7 +55,7 @@ def execute(memory, ic, acc, output):
 
             else:
                 error_index = str(ic.value).zfill(4)
-                print(f"Invalid instruction in line {error_index}! :: {memory.memory[error_index]}")
+                errors.append(f"Invalid instruction in line {error_index} ! :: {memory.memory[error_index]}")
                 break
 
             ic_val = int(ic.value) + 1
@@ -62,5 +63,6 @@ def execute(memory, ic, acc, output):
 
         else:
             error_index = str(ic.value).zfill(4)
-            print(f"Invalid instruction in line {error_index}! :: {memory.memory[error_index]}")
+            errors.append(f"Instruction doesn't match with pattern +XXX0009999 {error_index} ! :: {memory.memory[error_index]}")
             break
+    return errors
