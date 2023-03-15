@@ -10,7 +10,7 @@ def lda(address, memory, acc):
     :param acc:
     :return: None
     """
-    acc.value += memory.load(address)
+    acc.value = memory.load(address)
 
 
 def sto(address, memory, acc):
@@ -24,44 +24,48 @@ def sto(address, memory, acc):
     memory.store(address, acc.value)
 
 
-def add(value, acc):
+def add(address, memory, acc):
     """
     adds value to acc
-    :param value:
+    :param address:
     :param acc:
+    :param memory:
     :return: None
     """
-    acc.value += int(value)
+    acc.value += memory.load(address)
 
 
-def sub(value, acc):
+def sub(address, memory, acc):
     """
     subtracts value from acc
-    :param value:
+    :param address:
     :param acc:
+    :param memory:
     :return: None
     """
-    acc.value -= int(value)
+    acc.value -= memory.load(address)
 
 
-def mpy(value, acc):
+def mpy(address, memory, acc):
     """
     multiplies value to acc value
-    :param value:
+    :param address:
     :param acc:
+    :param memory:
     :return: None
     """
-    acc.value *= int(value)
+    acc.value *= memory.load(address)
 
 
-def div(value, acc):
+def div(address, memory, acc):
     """
     divides acc with value
-    :param value:
+    :param address:
     :param acc:
+    :param memory:
     :return: None
     """
-    acc.value //= int(value)
+    acc.value //= memory.load(address)
 
 
 def hlt(address, ic):
@@ -97,11 +101,11 @@ def rwd(address, memory, line_number):
     :return: None
     """
     while 1:
-        user_input = input(f"Enter the instruction (called from line {line_number}, saves at {address}):\n")
+        user_input = input(f"Enter the instruction (called from line {line_number}, will be saved at {address}):\n")
         pattern = re.compile("^[+][A-Z0]{3}0{3}[0-9]{4}$")
         if not pattern.match(user_input):
             print("Invalid instruction! Try again")
-            user_input = input(f"Enter the instruction (called from line {line_number}, saves at {address}):\n")
+            user_input = input(f"Enter the instruction (called from line {line_number}, will be saved at {address}):\n")
         else:
             break
     if memory.memory[address] != 11*'0':

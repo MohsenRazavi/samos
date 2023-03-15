@@ -21,41 +21,39 @@ def execute(memory, ic, acc, output):
                 sto(param, memory, acc)
                 ic_in_instruction_range = True
             elif command == 'ADD':
-                add(param, acc)
+                add(param, memory, acc)
                 ic_in_instruction_range = True
             elif command == 'SUB':
-                sub(param, acc)
+                sub(param, memory, acc)
                 ic_in_instruction_range = True
             elif command == 'MPY':
-                mpy(param, acc)
+                mpy(param, memory, acc)
                 ic_in_instruction_range = True
             elif command == 'DIV':
-                div(param, acc)
+                div(param, memory, acc)
                 ic_in_instruction_range = True
             elif command == 'BRU':
                 bru(param, ic)
                 ic_in_instruction_range = True
-
-                ic_val = int(ic.value) + 1
-                ic.value = str(ic_val)
                 continue
             elif command == 'BMI':
+                last_ic_val = ic.value
                 bmi(param, ic, acc)
-
-                ic_val = int(ic.value) + 1
-                ic.value = str(ic_val)
+                if ic.value == last_ic_val:
+                    ic_val = int(ic.value) + 1
+                    ic.value = str(ic_val)
                 continue
             elif command == 'RWD':
                 rwd(param, memory, ic.value)
             elif command == 'WWD':
                 wwd(param, memory, output)
             elif command == 'HLT':
+                break
                 hlt(param, ic)
                 ic_in_instruction_range = False
-                break
 
             ic_val = int(ic.value) + 1
-            ic.value = str(ic_val)
+            ic.value = str(ic_val).zfill(4)
 
         else:
             error_index = str(ic.value).zfill(4)

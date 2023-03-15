@@ -4,7 +4,7 @@ class Memory:
     def __str__(self):
         res = ''
         for k, v in self.memory.items():
-            res += f'<< {k} :: {v} >>\n'
+            res += f'<< {k} :: {v} >>\t'
         return res
 
     def load(self, address):
