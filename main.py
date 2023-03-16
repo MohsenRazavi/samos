@@ -6,8 +6,16 @@ from tools.flags import Ic, Output
 from tools.reader import read_code
 from tools.executer import execute
 
-
-mem_size = int(input('Enter memory size :\n'))
+while 1:
+    mem_size = input('Enter memory size (leave free to set 10000) :\n')
+    try:
+        mem_size = int(mem_size)
+    except ValueError:
+        if mem_size == '':
+            mem_size = 10000
+            break
+        else:
+            print("Invalid input! Try again.")
 
 file_name = input('Enter file name :\n')
 check_file = True
@@ -42,7 +50,6 @@ if errors:
     print(f"The program finished after {run_time} seconds !")
 else:
     print(f'The program run successfully in {run_time} seconds !')
-
 
 """
 // Seyed Mohsen Razavi Zadegan 40030489
