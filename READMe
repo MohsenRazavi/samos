@@ -1,4 +1,4 @@
-write your samos code in a txt file and copy it into testcase folder
+write your samos code in a txt file and copy it into testcase folder. ( if testcase folder not exists make it in the root of project )
 run program
 enter the file name
 enter memory size
