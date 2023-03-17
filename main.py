@@ -38,7 +38,7 @@ start_time = time.time()
 errors = execute(mem, ic, acc, output)
 end_time = time.time()
 
-run_time = end_time - start_time
+run_time = str(end_time - start_time)[:5]
 
 print(mem)
 print(">> Ic :: ", ic)
@@ -46,7 +46,7 @@ print(">> Output :: ", output)
 print(">> Acc :: ", acc)
 if errors:
     for e in errors:
-        print(f"ERROR :: {e}")
+        print(e)
     print(f"The program finished after {run_time} seconds !")
 else:
     print(f'The program run successfully in {run_time} seconds !')
